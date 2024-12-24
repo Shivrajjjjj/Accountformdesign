@@ -1,0 +1,7 @@
+C:\Users\shivr\source\repos\formdesign\obj\Debug\net8.0\formdesign.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\shivr\source\repos\formdesign\obj\Debug\net8.0\formdesign.AssemblyInfoInputs.cache
+C:\Users\shivr\source\repos\formdesign\obj\Debug\net8.0\formdesign.AssemblyInfo.cs
+C:\Users\shivr\source\repos\formdesign\obj\Debug\net8.0\formdesign.csproj.CoreCompileInputs.cache
+C:\Users\shivr\source\repos\formdesign\obj\Debug\net8.0\formdesign.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\shivr\source\repos\formdesign\obj\Debug\net8.0\formdesign.RazorAssemblyInfo.cache
+C:\Users\shivr\source\repos\formdesign\obj\Debug\net8.0\formdesign.RazorAssemblyInfo.cs

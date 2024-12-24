@@ -1,0 +1,191 @@
+﻿@page
+@model formdesign.Pages.ppersonal_newModel
+@{
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"]</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+        }
+        h1, h2 {
+            color: navy;
+        }
+    </style>
+    <script>
+        // JavaScript for form validation
+        function validateForm() {
+            var form = document.forms["personalForm"];
+            var photoInput = form["photo-upload"];
+            var maxSize = 40 * 1024; // 40KB
+
+            // PAN Validation: Must be exactly 10 characters
+            var pan = form["pan"].value;
+            if (pan.length !== 10) {
+                alert("PAN must be exactly 10 characters.");
+                return false;
+            }
+
+            // Aadhar Validation: Must be exactly 12 digits
+            var aadhar = form["aadhar"].value;
+            if (aadhar.length !== 12 || isNaN(aadhar)) {
+                alert("Aadhar Number must be exactly 12 digits.");
+                return false;
+            }
+
+            // Phone Number Validation: Must be exactly 10 digits
+            var phone = form["phone"].value;
+            if (phone.length !== 10 || isNaN(phone)) {
+                alert("Phone Number must be exactly 10 digits.");
+                return false;
+            }
+
+            // Mobile Number Validation: Must be exactly 10 digits
+            var mobile = form["mobile"].value;
+            if (mobile.length !== 10 || isNaN(mobile)) {
+                alert("Mobile Number must be exactly 10 digits.");
+                return false;
+            }
+
+            // Email Validation: Must match the basic email format
+            var email = form["email"].value;
+            var emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+            if (!emailPattern.test(email)) {
+                alert("Please enter a valid email address.");
+                return false;
+            }
+
+            // Photo Size Validation
+            if (photoInput.files[0].size > maxSize) {
+                alert("Photo size must not exceed 40KB.");
+                return false;
+            }
+
+            return true;
+        }
+    </script>
+</head>
+<body class="bg-gray-100">
+
+    <nav class="bg-blue-600 p-4 text-white shadow-lg">
+        <div class="container mx-auto flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <img src="https://storage.googleapis.com/a1aa/image/GyCKrDNJQW5TOJA2EYHPZMfNZ7jhP7CrK3vjIkD1xbfgaD9TA.jpg" alt="Company logo with a placeholder image" class="w-10 h-10" width="40" height="40">
+                <div class="text-lg font-bold">Account Forms</div>
+            </div>
+            <ul class="flex space-x-4">
+                <li><a href="home" class="hover:underline"><i class="fas fa-home"></i> Home</a></li>
+                <li><a href="ppersonal_new" class="hover:underline"><i class="fas fa-user"></i> Personal Account Form</a></li>
+                <li><a href="corporate" class="hover:underline"><i class="fas fa-building"></i> Corporate Account Form</a></li>
+                <li><a href="login" class="hover:underline"><i class="fas fa-sign-in-alt"></i> Login</a></li>
+                <li><a href="logout" class="hover:underline"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section id="home" class="text-center my-8">
+        <h1 class="text-3xl font-bold">Welcome to Account Forms</h1>
+        <p class="mt-4">Navigate through the menu to fill out the form that suits your needs.</p>
+    </section>
+
+    <h1 class="text-3xl font-bold text-center my-8" id="personalForm">Personal Account Form</h1>
+    <form asp-action="SavePersonalForm" name="personalForm" onsubmit="return validateForm()" class="form-container bg-white p-8 rounded-lg shadow-lg max-w-4xl mx-auto mb-8" enctype="multipart/form-data">
+        <div class="section mb-8">
+            <h2 class="text-2xl font-semibold mb-4">Customer Information</h2>
+            <div class="mb-4">
+                <label for="customer-id" class="block font-medium mb-2">Customer ID</label>
+                <input type="text" id="customer-id" asp-for="CustomerId" class="w-full p-2 border border-gray-300 rounded">
+            </div>
+
+            <div class="mb-4">
+                <label for="customer-type" class="block font-medium mb-2">Customer Type</label>
+                <select id="customer-type" asp-for="CustomerType" class="w-full p-2 border border-gray-300 rounded">
+                    <option value="personal">Personal</option>
+                    <option value="corporate">Corporate</option>
+                </select>
+            </div>
+
+            <div class="mb-4">
+                <label for="pan" class="block font-medium mb-2">PAN</label>
+                <input type="text" id="pan" asp-for="Pan" class="w-full p-2 border border-gray-300 rounded">
+            </div>
+        </div>
+
+        <div class="section mb-8">
+            <h2 class="text-2xl font-semibold mb-4">For Personal</h2>
+            <div class="mb-4">
+                <label for="aadhar" class="block font-medium mb-2">Aadhar No. (12 Digits)</label>
+                <input type="text" id="aadhar" asp-for="Aadhar" class="w-full p-2 border border-gray-300 rounded">
+            </div>
+
+            <div class="mb-4 flex flex-col md:flex-row gap-4">
+                <div class="flex-1">
+                    <label for="last-name" class="block font-medium mb-2">Last Name</label>
+                    <input type="text" id="last-name" asp-for="LastName" class="w-full p-2 border border-gray-300 rounded">
+                </div>
+                <div class="flex-1">
+                    <label for="first-name" class="block font-medium mb-2">First Name</label>
+                    <input type="text" id="first-name" asp-for="FirstName" class="w-full p-2 border border-gray-300 rounded">
+                </div>
+                <div class="flex-1">
+                    <label for="middle-name" class="block font-medium mb-2">Middle Name</label>
+                    <input type="text" id="middle-name" asp-for="MiddleName" class="w-full p-2 border border-gray-300 rounded">
+                </div>
+            </div>
+
+            <div class="mb-4">
+                <label for="maiden-name" class="block font-medium mb-2">Maiden Name</label>
+                <input type="text" id="maiden-name" asp-for="MaidenName" class="w-full p-2 border border-gray-300 rounded">
+            </div>
+
+            <div class="mb-4">
+                <label for="father-name" class="block font-medium mb-2">Father's Name</label>
+                <input type="text" id="father-name" asp-for="FatherName" class="w-full p-2 border border-gray-300 rounded">
+            </div>
+
+            <div class="mb-4">
+                <label for="mother-name" class="block font-medium mb-2">Mother's Name</label>
+                <input type="text" id="mother-name" asp-for="MotherName" class="w-full p-2 border border-gray-300 rounded">
+            </div>
+        </div>
+
+        <!-- Address and Communication Details section -->
+
+        <div class="section mb-8">
+            <h2 class="text-2xl font-semibold mb-4">Address</h2>
+            <!-- Add inputs for Address, PinCode, City, District, State, and Nation with appropriate asp-for attribute -->
+        </div>
+
+        <div class="section mb-8">
+            <h2 class="text-2xl font-semibold mb-4">Permanent Address</h2>
+            <!-- Add inputs for Permanent Address with appropriate asp-for attribute -->
+        </div>
+
+        <div class="section mb-8">
+            <h2 class="text-2xl font-semibold mb-4">Communication Details</h2>
+            <!-- Add inputs for Phone, Alternate Phone, Mobile, Alternate Mobile, and Email with appropriate asp-for attribute -->
+        </div>
+
+        <div class="section mb-8">
+            <h2 class="text-2xl font-semibold mb-4">KYC Details</h2>
+            <!-- Add inputs for Aadhar Card Image Upload, PAN Image Upload, Address Proof, and Identification Proof with appropriate asp-for attribute -->
+        </div>
+
+        <div class="flex justify-end gap-4">
+            <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Save</button>
+            <button type="button" class="bg-yellow-500 text-white px-4 py-2 rounded hover:bg-yellow-600">Modify</button>
+            <button type="button" class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600">Clear</button>
+            <button type="button" class="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600">Exit</button>
+            <button type="button" asp-page-handler="GeneratePDF" class="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600">Generate PDF</button>
+        </div>
+    </form>
+</body>
+</html>

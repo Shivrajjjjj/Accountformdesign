@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# SQL Server Management Studio Solution File, Format Version 20.00
+VisualStudioVersion = 15.0.28307.421
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{4F2E2C19-372F-40D8-9FA7-9D2138C6997A}") = "formaccounts", "formaccounts\formaccounts.ssmssqlproj", "{9E7704F8-CA72-4A70-AB4D-121B48EF3395}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Default|Default = Default|Default
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9E7704F8-CA72-4A70-AB4D-121B48EF3395}.Default|Default.ActiveCfg = Default
+		{15FFA99A-36FE-4D7B-9D79-9B727D1E9B9A}.Default|Default.ActiveCfg = Default
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {9E2AD346-D633-4AEA-92A0-E669C867ECCA}
+	EndGlobalSection
+EndGlobal
